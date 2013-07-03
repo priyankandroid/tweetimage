@@ -1,6 +1,5 @@
 package com.example.tweetimage;
 
-import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -8,7 +7,6 @@ import java.net.URLDecoder;
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.basic.DefaultOAuthProvider;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
-import twitter4j.StatusUpdate;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
@@ -16,6 +14,8 @@ import twitter4j.User;
 import twitter4j.auth.AccessToken;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
@@ -103,6 +103,7 @@ public class TwitterApp {
 		try {
 			mTwitter.updateStatus(status);
 			//mTwitter.updateStatus(new StatusUpdate("").media(file)).getText();
+			
 			
 		} catch (TwitterException e) {
 			throw e;

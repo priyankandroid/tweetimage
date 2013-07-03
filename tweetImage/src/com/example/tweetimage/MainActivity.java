@@ -147,24 +147,28 @@ public class MainActivity extends Activity {
 		private String url;
 
 		protected void onPreExecute() {
+			if (mTwitter.hasAccessToken()) {
+				
+
+			} else {
+				mTwitterBtn.setChecked(false);
+
+				mTwitter.authorize();
+				
+			}
 			mProgressDialog = ProgressDialog.show(MainActivity.this, "",
 					"Sending image...", true);
 
 			mProgressDialog.setCancelable(false);
 			mProgressDialog.show();
+			
 		}
 
 		protected Long doInBackground(URL... urls) {
 
 			long result = 0;
 			
-			if (!mTwitter.hasAccessToken()) {
-				mTwitterBtn.setChecked(false);
-
-				mTwitter.authorize();
-
-			} 
-
+			
 			// TwitterSession twitterSession = new
 			// TwitterSession(SendImageActivity.this);
 			AccessToken accessToken = mTwitter.getAccessToken();
@@ -185,7 +189,9 @@ public class MainActivity extends Activity {
 
 				url = upload.upload(new File(mPath));
 				Log.d(TAG, "Image uploaded, Twitpic url is " + url);
-				mTwitter.updateStatus(url.toString());
+				mTwitter.updateStatus("My howl message "+url);
+				
+				
 				result = 1;
 
 			} catch (Exception e) {
@@ -203,7 +209,9 @@ public class MainActivity extends Activity {
 
 		protected void onPostExecute(Long result) {
 			mProgressDialog.cancel();
-
+			Toast.makeText(MainActivity.this, "Image Uploaded to twitter",
+					Toast.LENGTH_LONG).show();
+			
 		}
 	}
 
