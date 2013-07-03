@@ -120,6 +120,8 @@ public class MainActivity extends Activity {
 			Toast.makeText(MainActivity.this,
 					"Connected to Twitter as " + username, Toast.LENGTH_LONG)
 					.show();
+			new ImageSender().execute();
+			
 		}
 
 		@Override
@@ -147,15 +149,6 @@ public class MainActivity extends Activity {
 		private String url;
 
 		protected void onPreExecute() {
-			if (mTwitter.hasAccessToken()) {
-				
-
-			} else {
-				mTwitterBtn.setChecked(false);
-
-				mTwitter.authorize();
-				
-			}
 			mProgressDialog = ProgressDialog.show(MainActivity.this, "",
 					"Sending image...", true);
 
